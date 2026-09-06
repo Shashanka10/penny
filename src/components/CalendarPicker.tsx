@@ -9,7 +9,7 @@ export function CalendarPicker({
   onChange: (date: Date) => void;
   maximumDate?: Date;
 }) {
-  const defaultStyles = useDefaultStyles("light");
+  const defaultStyles = useDefaultStyles("dark");
 
   return (
     <DateTimePicker
@@ -21,7 +21,7 @@ export function CalendarPicker({
       }
       styles={{
         ...defaultStyles,
-        today: { borderWidth: 1, borderColor: "#1A1D26" },
+        today: { borderWidth: 1, borderColor: "#4A9EFF" },
       }}
     />
   );

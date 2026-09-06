@@ -112,7 +112,7 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-brand-body" edges={["top"]}>
+    <SafeAreaView className="flex-1 bg-[#090B10]" edges={["top"]}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         className="flex-1"
@@ -123,19 +123,19 @@ export default function OnboardingScreen() {
             className="w-32 h-14 mb-10"
             resizeMode="contain"
           />
-          <Text className="text-[#1A1D26] text-3xl font-bold mb-2">
+          <Text className="text-[#F5F7FA] text-3xl font-bold mb-2">
             Let&apos;s get you set up
           </Text>
-          <Text className="text-brand-text-muted text-sm mb-10">
+          <Text className="text-[#8F96A3] text-sm mb-10">
             A couple of quick details to personalise your experience.
           </Text>
 
           {/* Starting balance */}
-          <Text className="text-brand-bg text-xs font-medium mb-1.5">
+          <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
             Starting balance
           </Text>
-          <View className="flex-row items-center bg-white border border-[#E8E6DF] rounded-xl px-4 mb-1">
-            <Text className="text-brand-text-secondary text-sm mr-2">
+          <View className="flex-row items-center bg-[#11141B] border border-[#242832] rounded-xl px-4 mb-1">
+            <Text className="text-[#8F96A3] text-sm mr-2">
               {selectedCurrency.symbol}
             </Text>
             <Controller
@@ -149,47 +149,47 @@ export default function OnboardingScreen() {
                     onChange(v);
                   }}
                   placeholder="e.g. 50000"
-                  placeholderTextColor="#8A8D96"
+                  placeholderTextColor="#717784"
                   keyboardType="numeric"
                   returnKeyType="done"
-                  className="flex-1 py-3.5 text-sm text-brand-bg"
+                  className="flex-1 py-3.5 text-sm text-[#F5F7FA]"
                 />
               )}
             />
           </View>
           {formErrors.startingBalance && (
-            <Text className="text-brand-coral text-xs mb-4">
+            <Text className="text-[#FF6B4A] text-xs mb-4">
               {formErrors.startingBalance.message}
             </Text>
           )}
           <View className="mb-4" />
 
           {/* Currency picker */}
-          <Text className="text-brand-bg text-xs font-medium mb-1.5">
+          <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
             Currency
           </Text>
           <TouchableOpacity
             onPress={() => setPickerOpen(true)}
-            className="flex-row items-center justify-between bg-white border border-[#E8E6DF] rounded-xl px-4 py-3.5 mb-6"
+            className="flex-row items-center justify-between bg-[#11141B] border border-[#242832] rounded-xl px-4 py-3.5 mb-6"
           >
-            <Text className="text-sm text-brand-bg">
+            <Text className="text-sm text-[#F5F7FA]">
               {selectedCurrency.symbol} {selectedCurrency.code} —{" "}
               {selectedCurrency.name}
             </Text>
-            <Feather name="chevron-down" size={16} color="#8A8D96" />
+            <Feather name="chevron-down" size={16} color="#8F96A3" />
           </TouchableOpacity>
 
           {error ? (
-            <Text className="text-brand-coral text-xs mb-4">{error}</Text>
+            <Text className="text-[#FF6B4A] text-xs mb-4">{error}</Text>
           ) : null}
 
           <TouchableOpacity
             onPress={handleSubmit(handleSave)}
             disabled={saving}
-            className="bg-brand-bg rounded-xl py-4 items-center"
+            className="bg-[#F5F7FA] rounded-xl py-4 items-center"
             activeOpacity={0.85}
           >
-            <Text className="text-white text-sm font-semibold">
+            <Text className="text-[#090B10] text-sm font-semibold">
               {saving ? "Saving…" : "Get started"}
             </Text>
           </TouchableOpacity>

@@ -1,5 +1,4 @@
 import { FormSheetModal } from "@/components/FormSheetModal";
-import { COLORS } from "@/constants/theme";
 import { useUpsertBudget } from "@/hooks/mutations/useBudgetMutations";
 import { Budget } from "@/lib/services/budgets";
 import { useEffect, useState } from "react";
@@ -51,7 +50,7 @@ export function BudgetModal({
       title={budget ? "Edit monthly budget" : "Set monthly budget"}
       onClose={onClose}
     >
-      <Text className="text-brand-bg text-xs font-medium mb-1.5">
+      <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
         Monthly budget
       </Text>
       <TextInput
@@ -61,23 +60,23 @@ export function BudgetModal({
           setAmount(v);
         }}
         placeholder="e.g. 50000"
-        placeholderTextColor={COLORS.placeholder}
+        placeholderTextColor="#717784"
         keyboardType="numeric"
         autoFocus
-        className="bg-white border border-[#E8E6DF] rounded-xl px-4 py-3.5 mb-5 text-sm text-brand-bg"
+        className="bg-[#11141B] border border-[#242832] rounded-xl px-4 py-3.5 mb-5 text-sm text-[#F5F7FA]"
       />
 
       {error ? (
-        <Text className="text-brand-coral text-xs mb-3">{error}</Text>
+        <Text className="text-[#FF6B4A] text-xs mb-3">{error}</Text>
       ) : null}
 
       <TouchableOpacity
         onPress={handleSave}
         disabled={saving}
-        className="bg-brand-bg rounded-xl py-4 items-center mb-3"
+        className="bg-[#F5F7FA] rounded-xl py-4 items-center mb-3"
         activeOpacity={0.85}
       >
-        <Text className="text-white text-sm font-semibold">
+        <Text className="text-[#090B10] text-sm font-semibold">
           {saving ? "Saving…" : "Save budget"}
         </Text>
       </TouchableOpacity>

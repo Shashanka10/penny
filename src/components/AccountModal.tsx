@@ -116,16 +116,16 @@ export function AccountModal({
       title={isEditing ? "Edit account" : "Add account"}
       onClose={onClose}
     >
-      <Text className="text-brand-bg text-xs font-medium mb-1.5">Name</Text>
+      <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">Name</Text>
       <TextInput
         value={name}
         onChangeText={setName}
         placeholder="e.g. HDFC Savings"
         placeholderTextColor={COLORS.placeholder}
-        className="bg-white border border-[#E8E6DF] rounded-xl px-4 py-3.5 text-sm text-brand-bg mb-5"
+        className="bg-[#11141B] border border-[#242832] rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA] mb-5"
       />
 
-      <Text className="text-brand-bg text-xs font-medium mb-1.5">Type</Text>
+      <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">Type</Text>
       <View className="flex-row flex-wrap gap-2 mb-5">
         {ACCOUNT_TYPES.map((t) => (
           <TouchableOpacity
@@ -133,13 +133,13 @@ export function AccountModal({
             onPress={() => setType(t)}
             className={`px-3.5 py-2 rounded-full border ${
               type === t
-                ? "bg-brand-bg border-brand-bg"
-                : "bg-white border-[#E8E6DF]"
+                ? "bg-[#F5F7FA] border-[#F5F7FA]"
+                : "bg-[#11141B] border-[#242832]"
             }`}
           >
             <Text
               className={`text-xs font-medium ${
-                type === t ? "text-white" : "text-brand-bg"
+                type === t ? "text-[#090B10]" : "text-[#8F96A3]"
               }`}
             >
               {ACCOUNT_TYPE_LABEL[t]}
@@ -149,23 +149,23 @@ export function AccountModal({
       </View>
 
       {error ? (
-        <Text className="text-brand-coral text-xs mb-3">{error}</Text>
+        <Text className="text-[#FF6B4A] text-xs mb-3">{error}</Text>
       ) : null}
 
       <TouchableOpacity
         onPress={handleSave}
         disabled={saving}
-        className="bg-brand-bg rounded-xl py-4 items-center mb-3"
+        className="bg-[#F5F7FA] rounded-xl py-4 items-center mb-3"
         activeOpacity={0.85}
       >
-        <Text className="text-white text-sm font-semibold">
+        <Text className="text-[#090B10] text-sm font-semibold">
           {saving ? "Saving…" : isEditing ? "Save changes" : "Add account"}
         </Text>
       </TouchableOpacity>
 
       {isEditing && !account.is_default && (
         <TouchableOpacity onPress={onMadeDefault} className="py-3 items-center">
-          <Text className="text-brand-blue text-sm font-medium">
+          <Text className="text-[#4A9EFF] text-sm font-medium">
             Make default
           </Text>
         </TouchableOpacity>
@@ -173,7 +173,7 @@ export function AccountModal({
 
       {isEditing && (
         <TouchableOpacity onPress={handleDelete} className="py-3 items-center">
-          <Text className="text-brand-coral text-sm font-medium">
+          <Text className="text-[#FF6B4A] text-sm font-medium">
             Delete account
           </Text>
         </TouchableOpacity>

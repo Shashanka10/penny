@@ -86,7 +86,7 @@ function ProcessingRing() {
           padding: 3,
         }}
       >
-        <View className="flex-1 rounded-full bg-[#161829]" />
+        <View className="flex-1 rounded-full bg-[#11141B]" />
       </LinearGradient>
     </Animated.View>
   );
@@ -185,7 +185,7 @@ export function VoiceRecorderModal({
       <View className="flex-1 justify-end">
         <BlurView intensity={40} tint="dark" className="absolute inset-0" />
         <LinearGradient
-          colors={["#1C1E2E", "#0F1020"]}
+          colors={["#171A22", "#090B10"]}
           style={{
             width: "100%",
             alignItems: "center",
@@ -202,15 +202,17 @@ export function VoiceRecorderModal({
           {status === "error" ? (
             <>
               <Feather name="alert-circle" size={32} color="#FF6B4A" />
-              <Text className="text-white/60 text-sm mt-3 mb-6 text-center">
+              <Text className="text-[#8F96A3] text-sm mt-3 mb-6 text-center">
                 Couldn&apos;t process that. Check your microphone permission and
                 try again.
               </Text>
               <TouchableOpacity
                 onPress={onClose}
-                className="bg-white/10 rounded-xl px-6 py-3.5"
+                className="bg-[#F5F7FA]/10 border border-[#242832] rounded-xl px-6 py-3.5"
               >
-                <Text className="text-white text-sm font-semibold">Close</Text>
+                <Text className="text-[#F5F7FA] text-sm font-semibold">
+                  Close
+                </Text>
               </TouchableOpacity>
             </>
           ) : (
@@ -228,14 +230,14 @@ export function VoiceRecorderModal({
                   AI voice log
                 </Text>
               </View>
-              <Text className="text-white text-base font-semibold mb-1">
+              <Text className="text-[#F5F7FA] text-base font-semibold mb-1">
                 {status === "recording"
                   ? "Listening…"
                   : status === "processing"
                     ? "Understanding that…"
                     : "Tell me about a transaction"}
               </Text>
-              <Text className="text-white/50 text-xs mb-8 text-center px-4">
+              <Text className="text-[#8F96A3] text-xs mb-8 text-center px-4">
                 {status === "recording"
                   ? `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`
                   : status === "processing"
@@ -278,7 +280,7 @@ export function VoiceRecorderModal({
                 onPress={onClose}
                 disabled={status === "processing"}
               >
-                <Text className="text-white/40 text-sm">Cancel</Text>
+                <Text className="text-[#717784] text-sm">Cancel</Text>
               </TouchableOpacity>
             </>
           )}

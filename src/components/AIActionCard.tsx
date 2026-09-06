@@ -91,7 +91,7 @@ export function AIActionCard({
             padding: 16,
           }}
         >
-          <View className="w-9 h-9 rounded-full bg-white/20 items-center justify-center mb-3">
+          <View className="w-9 h-9 rounded-full bg-white/15 border border-white/10 items-center justify-center mb-3">
             <Feather name={icon} size={16} color="#fff" />
           </View>
           <Text className="text-white text-[13px] font-semibold mb-0.5">

@@ -130,16 +130,21 @@ export default function HomeScreen() {
   }, [monthTransactions]);
 
   return (
-    <SafeAreaView className="flex-1 bg-brand-bg" edges={["top"]}>
+    <SafeAreaView className="flex-1 bg-[#090B10]" edges={["top"]}>
       <ScrollView
-        className="flex-1 bg-brand-body"
+        className="flex-1 bg-[#090B10]"
         showsVerticalScrollIndicator={false}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor="#4A9EFF"
+            colors={["#4A9EFF"]}
+          />
         }
       >
         {/* Dark hero header */}
-        <View className="bg-brand-bg rounded-b-[28px] px-5 pt-5 pb-[22px]">
+        <View className="bg-[#090B10] rounded-b-[30px] px-5 pt-5 pb-[24px]">
           <View className="flex-row justify-between items-center mb-[22px]">
             <Image
               source={require("../../../assets/images/remind.png")}
@@ -148,16 +153,14 @@ export default function HomeScreen() {
             />
             <View className="flex-row items-center gap-2.5">
               <View className="items-end">
-                <Text className="text-brand-text-secondary text-xs">
-                  {getGreeting()}
-                </Text>
-                <Text className="text-brand-text-primary text-base font-medium">
+                <Text className="text-[#8F96A3] text-xs">{getGreeting()}</Text>
+                <Text className="text-[#F5F7FA] text-base font-medium">
                   {user?.firstName ?? "there"}
                 </Text>
               </View>
               <TouchableOpacity
                 onPress={() => router.push("/(root)/(tabs)/profile")}
-                className="w-[38px] h-[38px] rounded-full bg-[#1A1D26] items-center justify-center overflow-hidden"
+                className="w-[40px] h-[40px] rounded-full bg-[#171A22] border border-[#292D37] items-center justify-center overflow-hidden"
               >
                 {user?.imageUrl && user.hasImage ? (
                   <Image
@@ -166,29 +169,27 @@ export default function HomeScreen() {
                     contentFit="cover"
                   />
                 ) : (
-                  <Feather name="user" size={18} color="#8A8D96" />
+                  <Feather name="user" size={18} color="#8F96A3" />
                 )}
               </TouchableOpacity>
             </View>
           </View>
 
           <View className="mb-[22px]">
-            <Text className="text-brand-text-secondary text-xs mb-1.5">
-              Total balance
-            </Text>
-            <Text className="text-brand-text-primary text-[38px] font-medium tracking-tight">
+            <Text className="text-[#8F96A3] text-xs mb-1.5">Total balance</Text>
+            <Text className="text-[#F5F7FA] text-[38px] font-medium tracking-tight">
               {formatPrice(totalBalance, currency)}
             </Text>
             <View className="flex-row gap-3.5 mt-2.5">
               <View className="flex-row items-center gap-1.5">
                 <Feather name="arrow-up-right" size={14} color="#3DDC84" />
-                <Text className="text-brand-success text-[13px]">
+                <Text className="text-[#3DDC84] text-[13px]">
                   {formatPrice(monthIncome, currency)}
                 </Text>
               </View>
               <View className="flex-row items-center gap-1.5">
                 <Feather name="arrow-down-right" size={14} color="#FF6B4A" />
-                <Text className="text-brand-coral text-[13px]">
+                <Text className="text-[#FF6B4A] text-[13px]">
                   {formatPrice(monthExpense, currency)}
                 </Text>
               </View>
@@ -206,7 +207,7 @@ export default function HomeScreen() {
                   })
                 }
                 activeOpacity={0.75}
-                className="flex-1 bg-brand-surface rounded-2xl border border-brand-surface-border py-4 items-center gap-2"
+                className="flex-1 bg-[#11141B] rounded-2xl border border-[#242832] py-4 items-center gap-2"
               >
                 <View
                   className="w-9 h-9 rounded-full items-center justify-center"
@@ -214,7 +215,7 @@ export default function HomeScreen() {
                 >
                   <Feather name={action.icon} size={17} color={action.color} />
                 </View>
-                <Text className="text-[#B8BAC2] text-[11px] font-medium text-center">
+                <Text className="text-[#B8BEC9] text-[11px] font-medium text-center">
                   {action.label}
                 </Text>
               </TouchableOpacity>
@@ -222,16 +223,16 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* Light body */}
+        {/* Dark body */}
         <View className="px-5 pt-[18px] pb-5">
           <TouchableOpacity
             onPress={() => router.push("/(root)/(tabs)/assistant")}
-            className="bg-white rounded-[18px] border border-[#E8E6DF] p-3.5 flex-row items-center gap-2.5 mb-[18px]"
+            className="bg-[#11141B] rounded-[18px] border border-[#242832] p-3.5 flex-row items-center gap-2.5 mb-[18px]"
           >
-            <View className="w-[26px] h-[26px] rounded-full bg-[#4A9EFF1A] items-center justify-center">
-              <View className="w-[7px] h-[7px] rounded-full bg-brand-blue" />
+            <View className="w-[28px] h-[28px] rounded-full bg-[#4A9EFF1A] border border-[#4A9EFF30] items-center justify-center">
+              <View className="w-[7px] h-[7px] rounded-full bg-[#4A9EFF]" />
             </View>
-            <Text className="text-brand-text-muted text-[13px] flex-1">
+            <Text className="text-[#8F96A3] text-[13px] flex-1">
               Ask AI anything about your money
             </Text>
             <Feather name="arrow-right" size={16} color="#4A9EFF" />
@@ -240,22 +241,22 @@ export default function HomeScreen() {
           <TouchableOpacity
             onPress={() => setBudgetModalOpen(true)}
             activeOpacity={0.85}
-            className="bg-white rounded-[18px] border border-[#E8E6DF] p-4 mb-[18px]"
+            className="bg-[#11141B] rounded-[18px] border border-[#242832] p-4 mb-[18px]"
           >
             <View className="flex-row items-center justify-between mb-2.5">
-              <Text className="text-[#1A1D26] text-sm font-medium">
+              <Text className="text-[#F5F7FA] text-sm font-medium">
                 Monthly budget
               </Text>
-              <Feather name="edit-2" size={13} color="#8A8D96" />
+              <Feather name="edit-2" size={13} color="#717784" />
             </View>
 
             {budget ? (
               <>
-                <Text className="text-brand-text-secondary text-xs mb-2">
+                <Text className="text-[#8F96A3] text-xs mb-2">
                   {formatPrice(monthExpense, currency)} of{" "}
                   {formatPrice(budget.amount, currency)} spent
                 </Text>
-                <View className="h-2 rounded-full bg-[#F0EEE7] overflow-hidden">
+                <View className="h-2 rounded-full bg-[#242832] overflow-hidden">
                   <View
                     className="h-2 rounded-full"
                     style={{
@@ -274,15 +275,15 @@ export default function HomeScreen() {
                 </View>
               </>
             ) : (
-              <Text className="text-brand-text-secondary text-xs">
+              <Text className="text-[#8F96A3] text-xs">
                 Tap to set a monthly spending budget
               </Text>
             )}
           </TouchableOpacity>
 
           {expenseBreakdown.length > 0 && (
-            <View className="bg-white rounded-[18px] border border-[#E8E6DF] p-4 mb-[18px]">
-              <Text className="text-[#1A1D26] text-sm font-medium mb-3">
+            <View className="bg-[#11141B] rounded-[18px] border border-[#242832] p-4 mb-[18px]">
+              <Text className="text-[#F5F7FA] text-sm font-medium mb-3">
                 Expense breakdown (this month)
               </Text>
               <View className="flex-row items-center">
@@ -293,7 +294,7 @@ export default function HomeScreen() {
                   }))}
                   radius={60}
                   innerRadius={38}
-                  innerCircleColor="#fff"
+                  innerCircleColor="#11141B"
                 />
                 <View className="flex-1 ml-4 gap-1.5">
                   {expenseBreakdown.slice(0, 6).map((c) => (
@@ -306,11 +307,11 @@ export default function HomeScreen() {
                           className="w-2 h-2 rounded-full"
                           style={{ backgroundColor: c.color }}
                         />
-                        <Text className="text-brand-text-secondary text-[11px]">
+                        <Text className="text-[#8F96A3] text-[11px]">
                           {getCategoryConfig(c.category).label}
                         </Text>
                       </View>
-                      <Text className="text-brand-bg text-[11px] font-medium">
+                      <Text className="text-[#F5F7FA] text-[11px] font-medium">
                         {formatPrice(c.amount, currency)}
                       </Text>
                     </View>
@@ -321,13 +322,13 @@ export default function HomeScreen() {
           )}
 
           <View className="flex-row justify-between items-center mb-3">
-            <Text className="text-[#1A1D26] text-sm font-medium">
+            <Text className="text-[#F5F7FA] text-sm font-medium">
               Recent transactions
             </Text>
             <TouchableOpacity
               onPress={() => router.push("/(root)/(tabs)/transactions")}
             >
-              <Text className="text-brand-text-secondary text-xs">See all</Text>
+              <Text className="text-[#717784] text-xs">See all</Text>
             </TouchableOpacity>
           </View>
 
@@ -337,8 +338,8 @@ export default function HomeScreen() {
             </View>
           ) : recentTransactions.length === 0 ? (
             <View className="items-center py-6">
-              <Feather name="inbox" size={28} color="#BDC3C7" />
-              <Text className="text-brand-text-muted text-sm mt-3">
+              <Feather name="inbox" size={28} color="#4B5563" />
+              <Text className="text-[#717784] text-sm mt-3">
                 No transactions yet
               </Text>
             </View>

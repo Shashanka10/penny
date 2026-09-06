@@ -140,37 +140,45 @@ export default function TransactionsScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-brand-body" edges={["top"]}>
-      <View className="px-5 pt-3 pb-2">
+    <SafeAreaView className="flex-1 bg-[#090B10]" edges={["top"]}>
+      <View className="px-5 pt-3 pb-2 bg-[#090B10]">
         <View className="flex-row items-center justify-between mb-3">
-          <Text className="text-brand-bg text-xl font-semibold">
-            Transactions
-          </Text>
+          <View>
+            <View className="flex-row items-center gap-2.5">
+              <View className="w-9 h-9 rounded-full bg-[#171A22] border border-[#242832] items-center justify-center">
+                <Feather name="credit-card" size={18} color="#4A9EFF" />
+              </View>
+
+              <Text className="text-[#F5F7FA] text-xl font-semibold">
+                Transactions
+              </Text>
+            </View>
+          </View>
           <TouchableOpacity
             onPress={handleExport}
             disabled={exporting}
-            className="w-9 h-9 rounded-full bg-white border border-[#E8E6DF] items-center justify-center"
+            className="w-9 h-9 rounded-full bg-[#11141B] border border-[#242832] items-center justify-center"
           >
             {exporting ? (
-              <ActivityIndicator size="small" color="#5C5F68" />
+              <ActivityIndicator size="small" color="#8F96A3" />
             ) : (
-              <Feather name="download" size={15} color="#5C5F68" />
+              <Feather name="download" size={15} color="#8F96A3" />
             )}
           </TouchableOpacity>
         </View>
 
-        <View className="flex-row items-center gap-2 bg-white rounded-xl border border-[#E8E6DF] px-3.5 py-2.5 mb-2.5">
-          <Feather name="search" size={15} color="#8A8D96" />
+        <View className="flex-row items-center gap-2 bg-[#11141B] rounded-xl border border-[#242832] px-3.5 py-2.5 mb-2.5">
+          <Feather name="search" size={15} color="#717784" />
           <TextInput
             value={search}
             onChangeText={setSearch}
             placeholder="Search transactions"
-            placeholderTextColor="#8A8D96"
-            className="flex-1 text-xs text-brand-bg"
+            placeholderTextColor="#717784"
+            className="flex-1 text-xs text-[#F5F7FA]"
           />
           {search.length > 0 && (
             <TouchableOpacity onPress={() => setSearch("")}>
-              <Feather name="x" size={15} color="#8A8D96" />
+              <Feather name="x" size={15} color="#717784" />
             </TouchableOpacity>
           )}
         </View>
@@ -182,15 +190,13 @@ export default function TransactionsScreen() {
               onPress={() => setActiveFilter(filter)}
               className={`px-3.5 py-1.5 rounded-full border ${
                 activeFilter === filter
-                  ? "bg-brand-bg border-brand-bg"
-                  : "bg-white border-[#E8E6DF]"
+                  ? "bg-[#F5F7FA] border-[#F5F7FA]"
+                  : "bg-[#11141B] border-[#242832]"
               }`}
             >
               <Text
                 className={`text-xs ${
-                  activeFilter === filter
-                    ? "text-white"
-                    : "text-brand-text-secondary"
+                  activeFilter === filter ? "text-[#090B10]" : "text-[#8F96A3]"
                 }`}
               >
                 {filter}
@@ -205,15 +211,13 @@ export default function TransactionsScreen() {
               onPress={() => setActiveAccountId(null)}
               className={`px-3.5 py-1.5 rounded-full border ${
                 activeAccountId === null
-                  ? "bg-brand-bg border-brand-bg"
-                  : "bg-white border-[#E8E6DF]"
+                  ? "bg-[#F5F7FA] border-[#F5F7FA]"
+                  : "bg-[#11141B] border-[#242832]"
               }`}
             >
               <Text
                 className={`text-xs ${
-                  activeAccountId === null
-                    ? "text-white"
-                    : "text-brand-text-secondary"
+                  activeAccountId === null ? "text-[#090B10]" : "text-[#8F96A3]"
                 }`}
               >
                 All Accounts
@@ -225,15 +229,15 @@ export default function TransactionsScreen() {
                 onPress={() => setActiveAccountId(account.id)}
                 className={`px-3.5 py-1.5 rounded-full border ${
                   activeAccountId === account.id
-                    ? "bg-brand-bg border-brand-bg"
-                    : "bg-white border-[#E8E6DF]"
+                    ? "bg-[#F5F7FA] border-[#F5F7FA]"
+                    : "bg-[#11141B] border-[#242832]"
                 }`}
               >
                 <Text
                   className={`text-xs ${
                     activeAccountId === account.id
-                      ? "text-white"
-                      : "text-brand-text-secondary"
+                      ? "text-[#090B10]"
+                      : "text-[#8F96A3]"
                   }`}
                 >
                   {account.name}
@@ -245,20 +249,20 @@ export default function TransactionsScreen() {
       </View>
 
       {loading ? (
-        <View className="flex-1 items-center justify-center">
+        <View className="flex-1 items-center justify-center bg-[#090B10]">
           <ActivityIndicator color="#4A9EFF" />
         </View>
       ) : error ? (
-        <View className="flex-1 items-center justify-center px-10">
+        <View className="flex-1 items-center justify-center px-10 bg-[#090B10]">
           <Feather name="alert-circle" size={32} color="#FF6B4A" />
-          <Text className="text-brand-text-muted text-sm mt-3 text-center">
+          <Text className="text-[#717784] text-sm mt-3 text-center">
             Couldn&apos;t load transactions.
           </Text>
           <TouchableOpacity
             onPress={() => loadData()}
-            className="mt-4 bg-brand-bg rounded-full px-4 py-2"
+            className="mt-4 bg-[#F5F7FA] rounded-full px-4 py-2"
           >
-            <Text className="text-white text-xs font-medium">Retry</Text>
+            <Text className="text-[#090B10] text-xs font-medium">Retry</Text>
           </TouchableOpacity>
         </View>
       ) : (
@@ -274,25 +278,28 @@ export default function TransactionsScreen() {
             paddingBottom: 100,
           }}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={loadData} />
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={loadData}
+              tintColor="#4A9EFF"
+              colors={["#4A9EFF"]}
+            />
           }
           ListHeaderComponent={
             transactions.length > 0 ? (
-              <View className="bg-white rounded-2xl border border-[#E8E6DF] p-4 mb-4">
+              <View className="bg-[#11141B] rounded-2xl border border-[#242832] p-4 mb-4">
                 <View className="flex-row justify-between items-center mb-3">
-                  <Text className="text-brand-bg text-xs font-medium">
+                  <Text className="text-[#F5F7FA] text-xs font-medium">
                     Daily income vs expense
                   </Text>
                   <View className="flex-row gap-3">
                     <View className="flex-row items-center gap-1">
-                      <View className="w-2 h-2 rounded-full bg-brand-success" />
-                      <Text className="text-[10px] text-brand-text-secondary">
-                        Income
-                      </Text>
+                      <View className="w-2 h-2 rounded-full bg-[#3DDC84]" />
+                      <Text className="text-[10px] text-[#8F96A3]">Income</Text>
                     </View>
                     <View className="flex-row items-center gap-1">
-                      <View className="w-2 h-2 rounded-full bg-brand-coral" />
-                      <Text className="text-[10px] text-brand-text-secondary">
+                      <View className="w-2 h-2 rounded-full bg-[#FF6B4A]" />
+                      <Text className="text-[10px] text-[#8F96A3]">
                         Expense
                       </Text>
                     </View>
@@ -306,11 +313,11 @@ export default function TransactionsScreen() {
                     barWidth={6}
                     spacing={4}
                     hideYAxisText
-                    xAxisColor="#E8E6DF"
+                    xAxisColor="#242832"
                     yAxisColor="transparent"
-                    rulesColor="#F0EEE7"
+                    rulesColor="#242832"
                     noOfSections={3}
-                    xAxisLabelTextStyle={{ color: "#8A8D96", fontSize: 7 }}
+                    xAxisLabelTextStyle={{ color: "#717784", fontSize: 7 }}
                     isThreeD={false}
                     roundedTop
                   />
@@ -320,8 +327,8 @@ export default function TransactionsScreen() {
           }
           ListEmptyComponent={
             <View className="items-center justify-center py-20">
-              <Feather name="inbox" size={32} color="#BDC3C7" />
-              <Text className="text-brand-text-muted text-sm mt-3">
+              <Feather name="inbox" size={32} color="#4B5563" />
+              <Text className="text-[#717784] text-sm mt-3">
                 {search ? "No matching transactions" : "No transactions yet"}
               </Text>
             </View>

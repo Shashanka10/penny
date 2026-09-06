@@ -75,11 +75,11 @@ export function ReceiptScannerModal({
           <View className="flex-row items-center justify-between px-5 pt-3">
             <TouchableOpacity
               onPress={onClose}
-              className="w-10 h-10 rounded-full bg-black/40 items-center justify-center"
+              className="w-10 h-10 rounded-full bg-black/50 border border-white/10 items-center justify-center"
             >
               <Feather name="x" size={18} color="#fff" />
             </TouchableOpacity>
-            <View className="flex-row items-center gap-1.5 bg-black/40 rounded-full px-3 py-1.5">
+            <View className="flex-row items-center gap-1.5 bg-[#11141B]/85 border border-white/10 rounded-full px-3 py-1.5">
               <MaterialCommunityIcons
                 name="robot-outline"
                 size={12}
@@ -98,7 +98,7 @@ export function ReceiptScannerModal({
             <TouchableOpacity
               onPress={handlePickFromLibrary}
               disabled={capturing}
-              className="w-12 h-12 rounded-full bg-black/40 items-center justify-center"
+              className="w-12 h-12 rounded-full bg-black/50 border border-white/10 items-center justify-center"
             >
               <Feather name="image" size={18} color="#fff" />
             </TouchableOpacity>
@@ -119,13 +119,13 @@ export function ReceiptScannerModal({
         </SafeAreaView>
 
         {!permission?.granted && permission?.canAskAgain === false && (
-          <View className="absolute inset-0 items-center justify-center bg-black/80 px-10">
-            <Feather name="camera-off" size={32} color="#8A8D96" />
-            <Text className="text-white/70 text-sm mt-3 text-center">
+          <View className="absolute inset-0 items-center justify-center bg-[#090B10]/95 px-10">
+            <Feather name="camera-off" size={32} color="#717784" />
+            <Text className="text-[#F5F7FA]/70 text-sm mt-3 text-center">
               Camera access is off. Enable it in Settings to scan receipts.
             </Text>
             <TouchableOpacity onPress={onClose} className="mt-6">
-              <Text className="text-white text-sm font-medium">Close</Text>
+              <Text className="text-[#F5F7FA] text-sm font-medium">Close</Text>
             </TouchableOpacity>
           </View>
         )}

@@ -26,7 +26,7 @@ export function TransactionRow({
 
   const row = (
     <View
-      className="flex-row items-center bg-white rounded-2xl border border-[#E8E6DF] pl-3 pr-3.5 py-4"
+      className="flex-row items-center bg-[#11141B] rounded-2xl border border-[#242832] pl-3 pr-3.5 py-4"
       style={{ borderLeftWidth: 3, borderLeftColor: config.color }}
     >
       <View
@@ -37,14 +37,14 @@ export function TransactionRow({
       </View>
 
       <View className="flex-1">
-        <Text className="text-brand-bg text-sm font-medium" numberOfLines={1}>
+        <Text className="text-[#F5F7FA] text-sm font-medium" numberOfLines={1}>
           {tx.description || config.label}
         </Text>
         <View className="flex-row items-center gap-1.5 mt-0.5">
           <Feather
             name={INPUT_METHOD_ICON[tx.input_method]}
             size={11}
-            color="#8A8D96"
+            color="#717784"
           />
           <View
             className="px-1.5 py-0.5 rounded-full"
@@ -60,7 +60,7 @@ export function TransactionRow({
           {tx.is_flagged && (
             <View className="flex-row items-center gap-1 ml-1">
               <Feather name="alert-triangle" size={11} color="#FF6B4A" />
-              <Text className="text-brand-coral text-[11px]">Flagged</Text>
+              <Text className="text-[#FF6B4A] text-[11px]">Flagged</Text>
             </View>
           )}
         </View>
@@ -68,7 +68,7 @@ export function TransactionRow({
 
       <Text
         className={`text-sm font-medium ${
-          isIncome ? "text-brand-success" : "text-brand-coral"
+          isIncome ? "text-[#3DDC84]" : "text-[#FF6B4A]"
         }`}
       >
         {isIncome ? "+" : "-"}
@@ -88,7 +88,7 @@ export function TransactionRow({
         renderRightActions={() => (
           <TouchableOpacity
             onPress={onDelete}
-            className="bg-brand-coral rounded-2xl ml-2 w-16 items-center justify-center"
+            className="bg-[#FF6B4A] rounded-2xl ml-2 w-16 items-center justify-center"
           >
             <Feather name="trash-2" size={18} color="#fff" />
           </TouchableOpacity>

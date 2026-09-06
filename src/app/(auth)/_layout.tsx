@@ -11,11 +11,14 @@ export default function AuthLayout() {
   if (isSignedIn) {
     return <Redirect href="/" />;
   }
+
   return (
     <Stack
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: "white" },
+        contentStyle: {
+          backgroundColor: "#0A0A0A",
+        },
       }}
     />
   );

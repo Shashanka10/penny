@@ -44,10 +44,12 @@ function MessageBubble({ message }: { message: ChatMessage }) {
     <View className={`mb-3 max-w-[85%] ${isUser ? "self-end" : "self-start"}`}>
       <View
         className={`rounded-2xl px-3.5 py-2.5 ${
-          isUser ? "bg-brand-bg" : "bg-white border border-[#E8E6DF]"
+          isUser ? "bg-[#F5F7FA]" : "bg-[#11141B] border border-[#242832]"
         }`}
       >
-        <Text className={`text-sm ${isUser ? "text-white" : "text-brand-bg"}`}>
+        <Text
+          className={`text-sm ${isUser ? "text-[#090B10]" : "text-[#F5F7FA]"}`}
+        >
           {message.content}
         </Text>
       </View>
@@ -100,9 +102,17 @@ export default function AssistantScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-brand-body" edges={["top"]}>
+    <SafeAreaView className="flex-1 bg-[#090B10]" edges={["top"]}>
       <View className="px-5 pt-3 pb-2">
-        <Text className="text-brand-bg text-xl font-semibold">Assistant</Text>
+        <View className="flex-row items-center gap-2.5">
+          <View className="w-9 h-9 rounded-full bg-[#171A22] border border-[#242832] items-center justify-center">
+            <Feather name="cpu" size={18} color="#4A9EFF" />
+          </View>
+
+          <Text className="text-[#F5F7FA] text-xl font-semibold">
+            Assistant
+          </Text>
+        </View>
       </View>
 
       <KeyboardAvoidingView
@@ -121,7 +131,7 @@ export default function AssistantScreen() {
           }}
           ListFooterComponent={
             sending ? (
-              <View className="self-start mb-3 bg-white border border-[#E8E6DF] rounded-2xl px-3.5 py-2.5">
+              <View className="self-start mb-3 bg-[#11141B] border border-[#242832] rounded-2xl px-3.5 py-2.5">
                 <ActivityIndicator size="small" color="#4A9EFF" />
               </View>
             ) : null
@@ -134,11 +144,9 @@ export default function AssistantScreen() {
               <TouchableOpacity
                 key={prompt}
                 onPress={() => sendMessage(prompt)}
-                className="bg-white rounded-xl border border-[#E8E6DF] px-3.5 py-2.5 self-start"
+                className="bg-[#11141B] rounded-xl border border-[#242832] px-3.5 py-2.5 self-start"
               >
-                <Text className="text-brand-text-secondary text-xs">
-                  {prompt}
-                </Text>
+                <Text className="text-[#8F96A3] text-xs">{prompt}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -153,19 +161,19 @@ export default function AssistantScreen() {
             value={input}
             onChangeText={setInput}
             placeholder="Ask about your money..."
-            placeholderTextColor="#8A8D96"
+            placeholderTextColor="#717784"
             editable={!sending}
-            className="flex-1 bg-white border border-[#E8E6DF] rounded-full px-4 py-3 text-sm text-brand-bg"
+            className="flex-1 bg-[#11141B] border border-[#242832] rounded-full px-4 py-3 text-sm text-[#F5F7FA]"
             onSubmitEditing={() => sendMessage(input)}
             returnKeyType="send"
           />
           <TouchableOpacity
             onPress={() => sendMessage(input)}
             disabled={sending}
-            className="w-11 h-11 rounded-full bg-brand-bg items-center justify-center"
+            className="w-11 h-11 rounded-full bg-[#F5F7FA] items-center justify-center"
             style={{ opacity: sending ? 0.6 : 1 }}
           >
-            <Feather name="arrow-up" size={18} color="#fff" />
+            <Feather name="arrow-up" size={18} color="#090B10" />
           </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>

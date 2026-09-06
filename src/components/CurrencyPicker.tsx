@@ -51,15 +51,15 @@ export function CurrencyPicker({
       animationType="slide"
       presentationStyle="pageSheet"
     >
-      <SafeAreaView className="flex-1 bg-brand-body" edges={["top"]}>
+      <SafeAreaView className="flex-1 bg-[#090B10]" edges={["top"]}>
         <View className="flex-row items-center px-5 pt-3 pb-2 gap-3">
           <TextInput
             value={search}
             onChangeText={setSearch}
             placeholder="Search currency…"
-            placeholderTextColor="#8A8D96"
+            placeholderTextColor="#717784"
             autoFocus
-            className="flex-1 bg-white border border-[#E8E6DF] rounded-full px-4 py-2.5 text-sm text-brand-bg"
+            className="flex-1 bg-[#11141B] border border-[#242832] rounded-full px-4 py-2.5 text-sm text-[#F5F7FA]"
           />
           <TouchableOpacity
             onPress={() => {
@@ -67,7 +67,7 @@ export function CurrencyPicker({
               onClose();
             }}
           >
-            <Text className="text-brand-text-secondary text-sm">Cancel</Text>
+            <Text className="text-[#8F96A3] text-sm">Cancel</Text>
           </TouchableOpacity>
         </View>
 
@@ -81,18 +81,13 @@ export function CurrencyPicker({
                 onSelect(item);
                 setSearch("");
               }}
-              className="flex-row items-center px-5 py-3.5 border-b border-[#F0EDE6]"
+              className="flex-row items-center bg-[#090B10] px-5 py-3.5 border-b border-[#242832]"
             >
-              <Text className="text-brand-text-secondary w-8 text-sm">
-                {item.symbol}
-              </Text>
-              <Text className="text-brand-bg text-sm font-medium w-12">
+              <Text className="text-[#8F96A3] w-8 text-sm">{item.symbol}</Text>
+              <Text className="text-[#F5F7FA] text-sm font-medium w-12">
                 {item.code}
               </Text>
-              <Text
-                className="text-brand-text-secondary text-sm flex-1"
-                numberOfLines={1}
-              >
+              <Text className="text-[#8F96A3] text-sm flex-1" numberOfLines={1}>
                 {item.name}
               </Text>
               {item.code === selectedCode && (

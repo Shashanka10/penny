@@ -25,14 +25,14 @@ export function PillGroup<T extends string>({
           onPress={() => onChange(option.key)}
           className={`flex-row items-center gap-1.5 px-3 py-2 rounded-full border ${
             value === option.key
-              ? "bg-brand-bg border-brand-bg"
-              : "bg-white border-[#E8E6DF]"
+              ? "bg-[#F5F7FA] border-[#F5F7FA]"
+              : "bg-[#11141B] border-[#242832]"
           }`}
         >
           {option.icon && <Text className="text-xs">{option.icon}</Text>}
           <Text
             className={`text-xs ${
-              value === option.key ? "text-white" : "text-brand-text-secondary"
+              value === option.key ? "text-[#090B10]" : "text-[#8F96A3]"
             }`}
           >
             {option.label}

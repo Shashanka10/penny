@@ -198,11 +198,17 @@ export default function AddTransactionScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-brand-body" edges={["top"]}>
+    <SafeAreaView className="flex-1 bg-[#090B10]" edges={["top"]}>
       <View className="px-5 pt-3 pb-2">
-        <Text className="text-brand-bg text-xl font-semibold">
-          Add transaction
-        </Text>
+        <View className="flex-row items-center gap-2.5">
+          <View className="w-9 h-9 rounded-full bg-[#171A22] border border-[#242832] items-center justify-center">
+            <Feather name="plus-circle" size={18} color="#4A9EFF" />
+          </View>
+
+          <Text className="text-[#F5F7FA] text-xl font-semibold">
+            Add Transaction
+          </Text>
+        </View>
       </View>
 
       <KeyboardAvoidingView
@@ -210,26 +216,27 @@ export default function AddTransactionScreen() {
         className="flex-1"
       >
         {loadingAccounts ? (
-          <View className="flex-1 items-center justify-center">
+          <View className="flex-1 items-center justify-center bg-[#090B10]">
             <ActivityIndicator color="#4A9EFF" />
           </View>
         ) : accountsError ? (
-          <View className="flex-1 items-center justify-center px-10">
+          <View className="flex-1 items-center justify-center px-10 bg-[#090B10]">
             <Feather name="alert-circle" size={32} color="#FF6B4A" />
-            <Text className="text-brand-text-muted text-sm mt-3 text-center">
+            <Text className="text-[#717784] text-sm mt-3 text-center">
               Couldn&apos;t load your accounts.
             </Text>
           </View>
         ) : accounts.length === 0 ? (
-          <View className="flex-1 items-center justify-center px-10">
+          <View className="flex-1 items-center justify-center px-10 bg-[#090B10]">
             <Feather name="alert-circle" size={32} color="#FF6B4A" />
-            <Text className="text-brand-text-muted text-sm mt-3 text-center">
+            <Text className="text-[#717784] text-sm mt-3 text-center">
               You need an account before adding a transaction.
             </Text>
           </View>
         ) : (
           <ScrollView
             showsVerticalScrollIndicator={false}
+            className="bg-[#090B10]"
             contentContainerStyle={{
               paddingHorizontal: 20,
               paddingBottom: 100,
@@ -254,7 +261,7 @@ export default function AddTransactionScreen() {
             </View>
 
             {/* Type toggle */}
-            <View className="flex-row bg-white rounded-xl border border-[#E8E6DF] p-1 mb-4">
+            <View className="flex-row bg-[#11141B] rounded-xl border border-[#242832] p-1 mb-4">
               {TYPE_OPTIONS.map((t) => (
                 <TouchableOpacity
                   key={t.key}
@@ -268,14 +275,12 @@ export default function AddTransactionScreen() {
                     );
                   }}
                   className={`flex-1 py-2 rounded-lg items-center ${
-                    type === t.key ? "bg-brand-bg" : ""
+                    type === t.key ? "bg-[#F5F7FA]" : ""
                   }`}
                 >
                   <Text
                     className={`text-xs font-medium ${
-                      type === t.key
-                        ? "text-white"
-                        : "text-brand-text-secondary"
+                      type === t.key ? "text-[#090B10]" : "text-[#8F96A3]"
                     }`}
                   >
                     {t.label}
@@ -285,7 +290,7 @@ export default function AddTransactionScreen() {
             </View>
 
             {/* Amount */}
-            <Text className="text-brand-bg text-xs font-medium mb-1.5">
+            <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
               Amount
             </Text>
             <Controller
@@ -300,21 +305,21 @@ export default function AddTransactionScreen() {
                   }}
                   onBlur={onBlur}
                   placeholder="0"
-                  placeholderTextColor="#8A8D96"
+                  placeholderTextColor="#717784"
                   keyboardType="numeric"
-                  className="bg-white border border-[#E8E6DF] rounded-xl px-4 py-3.5 text-sm text-brand-bg"
+                  className="bg-[#11141B] border border-[#242832] rounded-xl px-4 py-3.5 text-sm text-[#F5F7FA]"
                 />
               )}
             />
             {errors.amount && (
-              <Text className="text-brand-coral text-xs mt-1.5">
+              <Text className="text-[#FF6B4A] text-xs mt-1.5">
                 {errors.amount.message}
               </Text>
             )}
             <View className="mb-4" />
 
             {/* Category */}
-            <Text className="text-brand-bg text-xs font-medium mb-1.5">
+            <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
               Category
             </Text>
             <View className="mb-4">
@@ -330,7 +335,7 @@ export default function AddTransactionScreen() {
             </View>
 
             {/* Account */}
-            <Text className="text-brand-bg text-xs font-medium mb-1.5">
+            <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
               Account
             </Text>
             <View className="mb-1">
@@ -341,28 +346,28 @@ export default function AddTransactionScreen() {
               />
             </View>
             {errors.accountId && (
-              <Text className="text-brand-coral text-xs mb-3">
+              <Text className="text-[#FF6B4A] text-xs mb-3">
                 {errors.accountId.message}
               </Text>
             )}
             <View className="mb-3" />
 
             {/* Date */}
-            <Text className="text-brand-bg text-xs font-medium mb-1.5">
+            <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
               Date
             </Text>
             <TouchableOpacity
               onPress={() => setDatePickerOpen((v) => !v)}
-              className="flex-row items-center justify-between bg-white border border-[#E8E6DF] rounded-xl px-4 py-3.5 mb-1"
+              className="flex-row items-center justify-between bg-[#11141B] border border-[#242832] rounded-xl px-4 py-3.5 mb-1"
             >
-              <Text className="text-sm text-brand-bg">
+              <Text className="text-sm text-[#F5F7FA]">
                 {format(date, "d MMM yyyy")}
               </Text>
-              <Feather name="calendar" size={16} color="#5C5F68" />
+              <Feather name="calendar" size={16} color="#8F96A3" />
             </TouchableOpacity>
 
             {datePickerOpen && (
-              <View className="bg-white border border-[#E8E6DF] rounded-xl mb-4 overflow-hidden">
+              <View className="bg-[#11141B] border border-[#242832] rounded-xl mb-4 overflow-hidden">
                 <CalendarPicker
                   value={date}
                   maximumDate={new Date()}
@@ -376,7 +381,7 @@ export default function AddTransactionScreen() {
             {!datePickerOpen && <View className="mb-4" />}
 
             {/* Description */}
-            <Text className="text-brand-bg text-xs font-medium mb-1.5">
+            <Text className="text-[#F5F7FA] text-xs font-medium mb-1.5">
               Description (optional)
             </Text>
             <Controller
@@ -388,23 +393,23 @@ export default function AddTransactionScreen() {
                   onChangeText={onChange}
                   onBlur={onBlur}
                   placeholder="e.g. Swiggy order"
-                  placeholderTextColor="#8A8D96"
-                  className="bg-white border border-[#E8E6DF] rounded-xl px-4 py-3.5 mb-4 text-sm text-brand-bg"
+                  placeholderTextColor="#717784"
+                  className="bg-[#11141B] border border-[#242832] rounded-xl px-4 py-3.5 mb-4 text-sm text-[#F5F7FA]"
                 />
               )}
             />
 
             {error ? (
-              <Text className="text-brand-coral text-xs mb-4">{error}</Text>
+              <Text className="text-[#FF6B4A] text-xs mb-4">{error}</Text>
             ) : null}
 
             <TouchableOpacity
               onPress={handleSubmit(onSubmit)}
               disabled={saving}
-              className="bg-brand-bg rounded-xl py-4 items-center mb-2"
+              className="bg-[#F5F7FA] rounded-xl py-4 items-center mb-2"
               activeOpacity={0.85}
             >
-              <Text className="text-white text-sm font-semibold">
+              <Text className="text-[#090B10] text-sm font-semibold">
                 {saving ? "Saving…" : "Save transaction"}
               </Text>
             </TouchableOpacity>
@@ -413,10 +418,12 @@ export default function AddTransactionScreen() {
       </KeyboardAvoidingView>
 
       {scanning && (
-        <View className="absolute inset-0 items-center justify-center bg-black/40">
-          <View className="bg-white rounded-2xl px-6 py-5 items-center">
+        <View className="absolute inset-0 items-center justify-center bg-black/60">
+          <View className="bg-[#11141B] border border-[#242832] rounded-2xl px-6 py-5 items-center">
             <ActivityIndicator color="#4A9EFF" />
-            <Text className="text-brand-bg text-sm mt-3">Reading receipt…</Text>
+            <Text className="text-[#F5F7FA] text-sm mt-3">
+              Reading receipt…
+            </Text>
           </View>
         </View>
       )}

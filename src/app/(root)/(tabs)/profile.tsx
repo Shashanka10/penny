@@ -12,6 +12,7 @@ import { Image } from "expo-image";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+
 import {
   ActivityIndicator,
   Alert,
@@ -21,6 +22,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ACCOUNT_ICON: Record<AccountType, keyof typeof Feather.glyphMap> = {
@@ -32,7 +34,7 @@ const ACCOUNT_ICON: Record<AccountType, keyof typeof Feather.glyphMap> = {
 
 function SectionLabel({ children }: { children: string }) {
   return (
-    <Text className="text-brand-text-muted text-[11px] uppercase tracking-wide mb-2 mt-6 mx-5">
+    <Text className="text-[#717784] text-[11px] uppercase tracking-wide mb-2 mt-6 mx-5">
       {children}
     </Text>
   );
@@ -57,23 +59,21 @@ function Row({
     <TouchableOpacity
       onPress={onPress}
       disabled={!onPress}
-      className="flex-row items-center bg-white px-4 py-3.5 border-b border-[#F0EEE7] last:border-b-0"
+      className="flex-row items-center bg-[#11141B] px-4 py-3.5 border-b border-[#242832] last:border-b-0"
     >
-      <View className="w-8 h-8 rounded-full bg-[#F5F4F0] items-center justify-center mr-3">
-        <Feather name={icon} size={15} color={danger ? "#FF6B4A" : "#5C5F68"} />
+      <View className="w-8 h-8 rounded-full bg-[#171A22] border border-[#242832] items-center justify-center mr-3">
+        <Feather name={icon} size={15} color={danger ? "#FF6B4A" : "#8F96A3"} />
       </View>
       <Text
         className={`flex-1 text-sm ${
-          danger ? "text-brand-coral" : "text-brand-bg"
+          danger ? "text-[#FF6B4A]" : "text-[#F5F7FA]"
         }`}
       >
         {label}
       </Text>
-      {value && (
-        <Text className="text-brand-text-secondary text-xs mr-2">{value}</Text>
-      )}
+      {value && <Text className="text-[#8F96A3] text-xs mr-2">{value}</Text>}
       {showChevron && onPress && (
-        <Feather name="chevron-right" size={16} color="#BDC3C7" />
+        <Feather name="chevron-right" size={16} color="#717784" />
       )}
     </TouchableOpacity>
   );
@@ -87,12 +87,10 @@ export default function ProfileScreen() {
   const currency = useUserStore((state) => state.currency);
   const setCurrency = useUserStore((state) => state.setCurrency);
   const [biometricLock, setBiometricLock] = useState(false);
-
   const [modalVisible, setModalVisible] = useState(false);
   const [editingAccount, setEditingAccount] = useState<Account | null>(null);
   const [currencyPickerOpen, setCurrencyPickerOpen] = useState(false);
   const [uploadingAvatar, setUploadingAvatar] = useState(false);
-
   const {
     data: accounts = [],
     isLoading: loadingAccounts,
@@ -102,7 +100,6 @@ export default function ProfileScreen() {
 
   const handlePickAvatar = async () => {
     if (!user) return;
-
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) {
       Alert.alert(
@@ -111,7 +108,6 @@ export default function ProfileScreen() {
       );
       return;
     }
-
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
       allowsEditing: true,
@@ -120,7 +116,6 @@ export default function ProfileScreen() {
       base64: true,
     });
     if (result.canceled) return;
-
     setUploadingAvatar(true);
     try {
       const asset = result.assets[0];
@@ -128,7 +123,6 @@ export default function ProfileScreen() {
       const match = /\.(\w+)$/.exec(filename);
       const mimeType = match ? `image/${match[1]}` : "image/jpeg";
       const dataUrl = `data:${mimeType};base64,${asset.base64}`;
-
       await user.setProfileImage({ file: dataUrl });
     } catch (err) {
       console.error("Avatar upload failed:", err);
@@ -183,25 +177,33 @@ export default function ProfileScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-brand-body" edges={["top"]}>
+    <SafeAreaView className="flex-1 bg-[#090B10]" edges={["top"]}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 100 }}
       >
         <View className="px-5 pt-3 pb-2">
-          <Text className="text-brand-bg text-xl font-semibold">Profile</Text>
+          <View className="flex-row items-center gap-2.5">
+            <View className="w-9 h-9 rounded-full bg-[#171A22] border border-[#242832] items-center justify-center">
+              <Feather name="user" size={18} color="#4A9EFF" />
+            </View>
+
+            <Text className="text-[#F5F7FA] text-xl font-semibold">
+              Profile
+            </Text>
+          </View>
         </View>
 
         {/* User card */}
-        <View className="mx-5 mt-2 bg-brand-bg rounded-2xl px-5 py-6 items-center">
+        <View className="mx-5 mt-2 bg-[#11141B] border border-[#242832] rounded-2xl px-5 py-6 items-center">
           <TouchableOpacity
             onPress={handlePickAvatar}
             disabled={uploadingAvatar}
             activeOpacity={0.8}
-            className="w-20 h-20 rounded-full bg-[#1A1D26] items-center justify-center overflow-hidden border-2 border-[#2A2E3A]"
+            className="w-20 h-20 rounded-full bg-[#171A22] items-center justify-center overflow-hidden border-2 border-[#292D37]"
           >
             {uploadingAvatar ? (
-              <ActivityIndicator color="#8A8D96" />
+              <ActivityIndicator color="#8F96A3" />
             ) : user?.imageUrl && user.hasImage ? (
               <Image
                 source={{ uri: user.imageUrl }}
@@ -209,22 +211,20 @@ export default function ProfileScreen() {
                 contentFit="cover"
               />
             ) : (
-              <Feather name="user" size={30} color="#8A8D96" />
+              <Feather name="user" size={30} color="#8F96A3" />
             )}
             <View className="absolute bottom-0 inset-x-0 h-6 bg-black/50 items-center justify-center">
               <Feather name="camera" size={13} color="#F2EFE9" />
             </View>
           </TouchableOpacity>
 
-          <Text className="text-white text-2xl font-bold mt-3.5">
+          <Text className="text-[#F5F7FA] text-2xl font-bold mt-3.5">
             {user?.firstName} {user?.lastName}
           </Text>
+
           <View className="flex-row items-center gap-1.5 mt-1">
-            <Feather name="mail" size={11} color="#8A8D96" />
-            <Text
-              className="text-brand-text-secondary text-xs"
-              numberOfLines={1}
-            >
+            <Feather name="mail" size={11} color="#717784" />
+            <Text className="text-[#8F96A3] text-xs" numberOfLines={1}>
               {user?.emailAddresses?.[0]?.emailAddress}
             </Text>
           </View>
@@ -232,14 +232,14 @@ export default function ProfileScreen() {
 
         {/* Accounts */}
         <SectionLabel>Accounts</SectionLabel>
-        <View className="mx-5 rounded-2xl overflow-hidden border border-[#E8E6DF]">
+        <View className="mx-5 rounded-2xl overflow-hidden border border-[#242832]">
           {loadingAccounts ? (
-            <View className="bg-white px-4 py-5 items-center">
-              <ActivityIndicator color="#5C5F68" />
+            <View className="bg-[#11141B] px-4 py-5 items-center">
+              <ActivityIndicator color="#4A9EFF" />
             </View>
           ) : accountsError ? (
-            <View className="bg-white px-4 py-5 items-center">
-              <Text className="text-brand-text-muted text-xs">
+            <View className="bg-[#11141B] px-4 py-5 items-center">
+              <Text className="text-[#717784] text-xs">
                 Couldn&apos;t load your accounts.
               </Text>
             </View>
@@ -257,6 +257,7 @@ export default function ProfileScreen() {
               />
             ))
           )}
+
           <Row
             icon="plus"
             label="Add account"
@@ -269,7 +270,7 @@ export default function ProfileScreen() {
 
         {/* Preferences */}
         <SectionLabel>Preferences</SectionLabel>
-        <View className="mx-5 rounded-2xl overflow-hidden border border-[#E8E6DF]">
+        <View className="mx-5 rounded-2xl overflow-hidden border border-[#242832]">
           <Row
             icon="dollar-sign"
             label="Currency"
@@ -277,18 +278,25 @@ export default function ProfileScreen() {
             onPress={() => setCurrencyPickerOpen(true)}
           />
 
-          <View className="flex-row items-center bg-white px-4 py-3.5">
-            <View className="w-8 h-8 rounded-full bg-[#F5F4F0] items-center justify-center mr-3">
-              <Feather name="lock" size={15} color="#5C5F68" />
+          <View className="flex-row items-center bg-[#11141B] px-4 py-3.5">
+            <View className="w-8 h-8 rounded-full bg-[#171A22] border border-[#242832] items-center justify-center mr-3">
+              <Feather name="lock" size={15} color="#8F96A3" />
             </View>
-            <Text className="flex-1 text-sm text-brand-bg">Biometric lock</Text>
-            <Switch value={biometricLock} onValueChange={setBiometricLock} />
+            <Text className="flex-1 text-sm text-[#F5F7FA]">
+              Biometric lock
+            </Text>
+            <Switch
+              value={biometricLock}
+              onValueChange={setBiometricLock}
+              trackColor={{ false: "#242832", true: "#4A9EFF" }}
+              thumbColor="#F5F7FA"
+            />
           </View>
         </View>
 
         {/* Account actions */}
         <SectionLabel>Account</SectionLabel>
-        <View className="mx-5 rounded-2xl overflow-hidden border border-[#E8E6DF]">
+        <View className="mx-5 rounded-2xl overflow-hidden border border-[#242832]">
           <Row
             icon="log-out"
             label="Sign out"
