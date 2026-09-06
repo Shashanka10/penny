@@ -26,3 +26,109 @@ export async function getAccounts(supabase: SupabaseClient, userId: string) {
 
   return data as Account[];
 }
+
+export async function createAccount(
+  supabase: SupabaseClient,
+  userId: string,
+  { name, type }: { name: string; type: AccountType },
+) {
+  const { data, error } = await supabase
+    .from("accounts")
+    .insert({
+      user_id: userId,
+      name,
+      type,
+      balance: 0,
+      is_default: false,
+    })
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data as Account[];
+}
+
+export async function setDefaultAccount(
+  supabase: SupabaseClient,
+  userId: string,
+  accountId: string,
+) {
+  const { error: unsetError } = await supabase
+    .from("accounts")
+    .update({ is_default: false })
+    .eq("user_id", userId)
+    .neq("id", accountId);
+
+  if (unsetError) {
+    throw new Error(unsetError.message);
+  }
+
+  const { error: setError } = await supabase
+    .from("accounts")
+    .update({ is_default: true })
+    .eq("id", accountId);
+
+  if (setError) {
+    throw new Error(setError.message);
+  }
+}
+
+export async function updateAccount(
+  supabase: SupabaseClient,
+  accountId: string,
+  { name, type }: { name: string; type: AccountType },
+) {
+  const { data, error } = await supabase
+    .from("accounts")
+    .update({ name, type })
+    .eq("id", accountId)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data as Account[];
+}
+
+export async function deleteAccount(
+  supabase: SupabaseClient,
+  accountId: string,
+  { force = false }: { force?: boolean } = {},
+) {
+  const { count, error: countError } = await supabase
+    .from("transactions")
+    .select("id", { count: "exact", head: true })
+    .eq("account_id", accountId);
+
+  if (countError) {
+    throw new Error(countError.message);
+  }
+
+  const transactionCount = count ?? 0;
+
+  if (transactionCount > 0 && !force) {
+    return {
+      deleted: false,
+      transactionCount,
+    };
+  }
+
+  const { error: deleteError } = await supabase
+    .from("accounts")
+    .delete()
+    .eq("id", accountId);
+
+  if (deleteError) {
+    throw new Error(deleteError.message);
+  }
+
+  return {
+    deleted: true,
+    transactionCount,
+  };
+}
