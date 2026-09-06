@@ -119,7 +119,7 @@ export default function OnboardingScreen() {
       >
         <View className="flex-1 px-6 justify-center -mt-16">
           <Image
-            source={require("../assets/images/remind.png")}
+            source={require("../../assets/images/remind.png")}
             className="w-32 h-14 mb-10"
             resizeMode="contain"
           />

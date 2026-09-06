@@ -12,9 +12,21 @@ export default function TabLayout() {
           <NativeTabs.Trigger.Label>Home</NativeTabs.Trigger.Label>
           <NativeTabs.Trigger.Icon sf="house.fill" />
         </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="transactions">
+          <NativeTabs.Trigger.Icon sf="list.bullet" />
+          <NativeTabs.Trigger.Label>Transactions</NativeTabs.Trigger.Label>
+        </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="add-transaction">
+          <NativeTabs.Trigger.Icon sf="plus.circle" />
+          <NativeTabs.Trigger.Label>Add</NativeTabs.Trigger.Label>
+        </NativeTabs.Trigger>
         <NativeTabs.Trigger name="profile">
           <NativeTabs.Trigger.Icon sf="person.fill" />
           <NativeTabs.Trigger.Label>Profile</NativeTabs.Trigger.Label>
+        </NativeTabs.Trigger>
+        <NativeTabs.Trigger name="assistant">
+          <NativeTabs.Trigger.Icon sf="brain.head.profile" />
+          <NativeTabs.Trigger.Label>Assistant</NativeTabs.Trigger.Label>
         </NativeTabs.Trigger>
       </NativeTabs>
     );

@@ -121,7 +121,7 @@ export default function SignUpScreen() {
             <View className="items-center mb-10">
               <View className="w-20 h-20 rounded-3xl bg-white items-center justify-center shadow-sm">
                 <Image
-                  source={require("../assets/images/remind.png")}
+                  source={require("../../assets/images/remind.png")}
                   className="w-16 h-16"
                   resizeMode="contain"
                 />
@@ -246,7 +246,7 @@ export default function SignUpScreen() {
           <View className="items-center mb-9">
             <View className="w-20 h-20 rounded-3xl bg-white items-center justify-center mb-5 shadow-sm">
               <Image
-                source={require("../assets/images/remind.png")}
+                source={require("../../assets/images/remind.png")}
                 className="w-16 h-16"
                 resizeMode="contain"
               />
